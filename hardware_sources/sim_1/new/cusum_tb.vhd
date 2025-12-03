@@ -79,7 +79,7 @@ begin
     s_axis_aclk <= not s_axis_aclk after T / 2;
     
     read_file: process(s_axis_aclk)
-        file test_data : text open read_mode is "D:\UTCN\An3\SCS\lab89_soft\integer_values\LM35DZ_int.csv";
+        file test_data : text open read_mode is "integer_values\LM35DZ_int.csv";
         variable in_line : line;
         variable val: integer;
         variable space : character;
@@ -114,7 +114,7 @@ begin
     end process;
         
     write_file: process
-        file results : text open write_mode is "D:\UTCN\An3\SCS\lab89_soft\hardware_detection_output\LM35DZ_labels.csv";
+        file results : text open write_mode is "hardware_detection_output\LM35DZ_labels.csv";
         variable out_line : line;
         variable header_written : boolean := false;
     begin

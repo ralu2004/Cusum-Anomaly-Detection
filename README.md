@@ -3,7 +3,7 @@
 ![Language](https://img.shields.io/badge/languages-VHDL%20%7C%20Python-blue)
 ![Status](https://img.shields.io/badge/status-active-green)
 
-## 📌 Overview
+## Overview
 A hardware-software co-design of the **CUSUM (Cumulative Sum)** streaming anomaly detector. This repository includes:
 * **Hardware Modules:** A synthesizable VHDL implementation of the CUSUM algorithm.
 * **Software Reference:** A Python implementation serving as the "golden model."
@@ -11,7 +11,7 @@ A hardware-software co-design of the **CUSUM (Cumulative Sum)** streaming anomal
 
 The system is designed to detect anomalies in streaming time-series data (e.g., temperature measurements) by monitoring deviations from a target mean.
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 Cusum-Anomaly-Detection/
@@ -39,27 +39,30 @@ Cusum-Anomaly-Detection/
 │
 └── README.md
 ```
-## ⚙️ Workflow
+## Workflow
 This project follows a verification workflow where software defines the expected behavior for the hardware.
 
 ### 1. Data Preparation
 Raw data (CSV) is processed using the software tools to generate inputs for both the software model and the hardware testbench.
-Script: ```bash software_sources/convert_to_binary.py```
-Input: ```bash 04-12-22_temperature_measurements.csv```
+Script: ```software_sources/convert_to_binary.py```
+Input: ```04-12-22_temperature_measurements.csv```
 Output: Generates binary files (for VHDL ROM initialization) and integer files.
 
 ### 2. Software Reference Run
 The Python script runs the CUSUM algorithm on the data to establish the ground truth.
-Script: ```bash software_sources/cusum.py```
-Output: Stores detection results in ```text comparison/software_detection_outputs/```.
+Script: ```software_sources/cusum.py```
+Output: Stores detection results in ```comparison/software_detection_outputs/```.
 
 ### 3. Hardware Simulation
 The VHDL files in hardware_sources/ implement the actual hardware detector.
-Top Module: top.vhd
+Top Module: ```top.vhd```
 Simulation: Run your Vivado/ModelSim simulation.
-Output: Capture the simulation output into comparison/hardware_detection_output/.
+Output: Capture the simulation output into ```comparison/hardware_detection_output/```.
 
-# 4. Verification
+### 4. Verification
 Finally, the results are compared to ensure the hardware behaves exactly like the software model.
 Script: ```text comparison/compare_outputs.py```
 Action: Reads both output folders and flags any discrepancies.
+
+## Hardware Implementation 
+The hardware design is modular, breaking down the CUSUM calculation into distinct components: ROM Memory, which simulates a sensor stream by reading pre-loaded values.CUSUM Core: Calculates the positive ($S^+$) and negative ($S^-$) drift sums. Threshold Comparator: Triggers an alarm signal when sums exceed the pre-defined limit ($h$).

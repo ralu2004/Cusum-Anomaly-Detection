@@ -1,7 +1,4 @@
 # Cusum-Anomaly-Detection
-A hardware–software co-design of the CUSUM streaming anomaly detector. Includes hardware modules, a software reference implementation, and Python tools for validating correctness and profiling performance across platforms.
-
-# Cusum-Anomaly-Detection
 
 ![Language](https://img.shields.io/badge/languages-VHDL%20%7C%20Python-blue)
 ![Status](https://img.shields.io/badge/status-active-green)

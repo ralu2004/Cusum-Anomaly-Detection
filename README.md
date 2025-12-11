@@ -38,3 +38,28 @@ Cusum-Anomaly-Detection/
 │   └── cusum.py                 # Pure Python CUSUM implementation
 │
 └── README.md
+```
+## ⚙️ Workflow
+This project follows a verification workflow where software defines the expected behavior for the hardware.
+
+# 1. Data Preparation
+Raw data (CSV) is processed using the software tools to generate inputs for both the software model and the hardware testbench.
+Script: ```bash software_sources/convert_to_binary.py```
+Input: ```bash 04-12-22_temperature_measurements.csv```
+Output: Generates binary files (for VHDL ROM initialization) and integer files.
+
+# 2. Software Reference Run
+The Python script runs the CUSUM algorithm on the data to establish the ground truth.
+Script: ```bash software_sources/cusum.py```
+Output: Stores detection results in ```text comparison/software_detection_outputs/```.
+
+# 3. Hardware Simulation
+The VHDL files in hardware_sources/ implement the actual hardware detector.
+Top Module: top.vhd
+Simulation: Run your Vivado/ModelSim simulation.
+Output: Capture the simulation output into comparison/hardware_detection_output/.
+
+# 4. Verification
+Finally, the results are compared to ensure the hardware behaves exactly like the software model.
+Script: ```text comparison/compare_outputs.py```
+Action: Reads both output folders and flags any discrepancies.

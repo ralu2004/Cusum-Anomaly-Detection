@@ -65,4 +65,18 @@ Script: ```text comparison/compare_outputs.py```
 Action: Reads both output folders and flags any discrepancies.
 
 ## Hardware Implementation 
-The hardware design is modular, breaking down the CUSUM calculation into distinct components: ROM Memory, which simulates a sensor stream by reading pre-loaded values.CUSUM Core: Calculates the positive ($S^+$) and negative ($S^-$) drift sums. Threshold Comparator: Triggers an alarm signal when sums exceed the pre-defined limit ($h$).
+The hardware design is modular, breaking down the CUSUM calculation into distinct components: 
+**ROM Memory:** simulates a sensor stream by reading pre-loaded values.CUSUM Core: Calculates the positive ($S^+$) and negative ($S^-$) drift sums. 
+**Threshold Comparator:** Triggers an alarm signal when sums exceed the pre-defined limit ($h$).
+
+## Getting Started
+### Prerequisites
+Python 3.x (for reference model and validation).
+Xilinx Vivado (or any standard VHDL simulator) for hardware synthesis/simulation.
+
+### Running the Comparison
+To validate the current outputs, navigate to the comparison folder and run:
+```bash
+cd comparison
+python compare_outputs.py
+```
